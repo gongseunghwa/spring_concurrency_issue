@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class StockService {
     private final StockRepository stockRepository;
 
-    @Transactional
+//    @Transactional
     public synchronized void decrease(Long id, Long quantity) {
         Stock stock = stockRepository.findStockByProductId(id).orElseThrow();
         stock.decrease(quantity);
