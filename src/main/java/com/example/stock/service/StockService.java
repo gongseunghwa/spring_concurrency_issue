@@ -13,7 +13,7 @@ public class StockService {
     private final StockRepository stockRepository;
 
     @Transactional
-    public void decrease(Long id, Long quantity) {
+    public synchronized void decrease(Long id, Long quantity) {
         Stock stock = stockRepository.findStockByProductId(id).orElseThrow();
         stock.decrease(quantity);
         stockRepository.save(stock);
