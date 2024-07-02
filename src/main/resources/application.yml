@@ -9,7 +9,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
   datasource:
-    url: jdbc:mysql://localhost:3306/store_example
+    url: jdbc:mysql://localhost:3306/stock_example
     username: root
     password: admin
     driver-class-name: com.mysql.cj.jdbc.Driver
