@@ -100,3 +100,24 @@ Begin Transaction 과 commit Transaction 은 synchronized 메소드가 아니므
 ![img.png](img.png)
 ![img_1.png](img_1.png)
 ![img_2.png](img_2.png)
+
+### 6. Named Lock 활용
+- 이름을 가진 메타데이터 락 (메타데이터 락: 데이터베이스 객체의 이름이나 구조를 변경하는 경우 획득하는 잠금이다.)
+- 하나의 세션에서 해당이름으로 락을 가지면 다른 세션에서 해당 락에 접근할 수 없다.
+- 트랜잭션이 종료될 때 자동으로 해제되지 않기 때문에 주의가 필요하다. (직접 해제 or 선점 시간 종료로 해제 가능하다.)
+- 데이터 소스를 분리해서 사용하는 것이 좋다. (Connection Pool 을 늘리는 것만으로는 다른 서비스에 영향을 끼칠 수 있다.)
+- DB에 거는 락은 테이블에 대한 정합성을 보장하는데 사용하지만 Named Lock 은 보통 비즈니스 로직 혹은 API 등으로 인해 발생하는 임계영역에 락을 걸어 해당 로직의 정합성을 보장한다.
+- 타임아웃 구현에 유리하다.
+
+1. GET_LOCK 과 RELEASE_LOCK 함수를 활용해 LOCK을 거는 Repo생성 (실 업무에서는 커넥션 풀 분리가 필요하다.)
+![img_3.png](img_3.png)
+2. 락을 건 후 로직 종료 시점에 락을 푸는 서비스
+![img_4.png](img_4.png)
+![img_5.png](img_5.png)
+
+3. 실패이유 >> 분산락의 해제시점과 @Transactional 의 트랜잭션 커밋 시점의 불일치
+![img_6.png ](img_6.png)
+4. Facade 패턴 및 트랜잭션 propagation = Propagation.REQUIRES_NEW 설정을 통해 해결
+![img_7.png](img_7.png)
+![img_8.png](img_8.png)
+![img_9.png](img_9.png)![img_10.png](img_10.png)
