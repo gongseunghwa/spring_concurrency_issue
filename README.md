@@ -4,7 +4,7 @@
 재고 관리 시스템
 - 프로젝트 구조 <br>
 ![img.png](img/img.png)
-- 주요 기능
+- 주요 기능 <br>
 ![img_1.png](img/img_1.png)
 <br>
 1. 해당 상품 호출
@@ -15,11 +15,11 @@
 ![img_2.png](img/img_2.png)
 ![img_3.png](img/img_3.png)
 
-### 3. synchronized 활용(실패)
+### 3-1. synchronized 활용(실패)
 ![img_4.png](img/img_4.png)
 ![img_5.png](img/img_5.png)
 
-### 4. synchronized 활용(성공)
+### 3-2. synchronized 활용(성공)
 - 앞의 방법에서 @Transactional 어노테이션을 제거 >> 성공
 <br>
 ![img_6.png](img/img_6.png)
@@ -97,9 +97,9 @@ Begin Transaction 과 commit Transaction 은 synchronized 메소드가 아니므
 </tr>
 </table>
 
-![img.png](img100.png)
-![img_1.png](img_101.png)
-![img_2.png](img_102.png)
+![img.png](img/img100.png)
+![img_1.png](img/img_101.png)
+![img_2.png](img/img_102.png)
 
 ### 6. Named Lock 활용
 - 이름을 가진 메타데이터 락 (메타데이터 락: 데이터베이스 객체의 이름이나 구조를 변경하는 경우 획득하는 잠금이다.)
@@ -110,17 +110,17 @@ Begin Transaction 과 commit Transaction 은 synchronized 메소드가 아니므
 - 타임아웃 구현에 유리하다.
 
 1. GET_LOCK 과 RELEASE_LOCK 함수를 활용해 LOCK을 거는 Repo생성 (실 업무에서는 커넥션 풀 분리가 필요하다.)
-![img_3.png](img_103.png)
+![img_3.png](img/img_103.png)
 2. 락을 건 후 로직 종료 시점에 락을 푸는 서비스
-![img_4.png](img_104.png)
-![img_5.png](img_105.png)
+![img_4.png](img/img_104.png)
+![img_5.png](img/img_105.png)
 
 3. 실패이유 >> 분산락의 해제시점과 @Transactional 의 트랜잭션 커밋 시점의 불일치
-![img_6.png ](img_106.png)
+![img_6.png ](img/img_106.png)
 4. Facade 패턴 및 트랜잭션 propagation = Propagation.REQUIRES_NEW 설정을 통해 해결
-![img_7.png](img_107.png)
-![img_8.png](img_108.png)
-![img_9.png](img_109.png)![img_10.png](img_110.png)
+![img_7.png](img/img_107.png)
+![img_8.png](img/img_108.png)
+![img_9.png](img/img_109.png)![img_10.png](img/img_110.png)
 
 ### 7. lettuce를 활용한 분산락
 - 기본적으로 Named Lock과 동작이 비슷하다. setnx를 활용하여 락을 건다.
