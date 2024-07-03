@@ -10,4 +10,12 @@ services:
     ports:
       - 3306:3306
 
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - 6379:6379
+
+
+
 

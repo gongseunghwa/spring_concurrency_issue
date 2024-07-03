@@ -16,6 +16,8 @@ spring:
     hikari:
       maximum-pool-size: 40
 
+
+
 logging:
   level:
     org:

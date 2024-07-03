@@ -121,3 +121,11 @@ Begin Transaction 과 commit Transaction 은 synchronized 메소드가 아니므
 ![img_7.png](img_7.png)
 ![img_8.png](img_8.png)
 ![img_9.png](img_9.png)![img_10.png](img_10.png)
+
+### 7. lettuce를 활용한 분산락
+- 기본적으로 Named Lock과 동작이 비슷하다. setnx를 활용하여 락을 건다.
+![img_11.png](img_11.png)
+- 구현이 간단하지만, 레디스에 부하를 줄 수 있다.
+![img_12.png](img_12.png)
+![img_13.png](img_13.png)
+
